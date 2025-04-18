@@ -1,103 +1,99 @@
-import Image from "next/image";
+import CustomBreadcrumb from "@/components/CustomBreadcrumb";
+import Gallery from "./_components/Gallery";
+import Info from "./_components/Info";
+import Tags from "./_components/Tags";
+import Price from "./_components/Price";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Brush, Linkedin, Twitter, Instagram } from "lucide-react";
+import Form from "./_components/ProductForm";
+import { ProductTabs } from "./_components/ProductTabs";
 
-export default function Home() {
+const breadCrumbItems = [
+  { id: 0, label: "شما اینجا هستید :", href: "/" },
+  { id: 1, label: "چاپ ایران کهن", href: "/" },
+  { id: 2, label: "چاپ دیجیتال اختصاصی", href: "/components" },
+  {
+    id: 3,
+    label: "چاپ دیجیتال اختصاصی بدون صحافی",
+    href: "/components",
+  },
+];
+
+const getFromApi = async (productGroupId: string, workTypeId: string): Promise<Form> => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/Order/GetForm?productGroupId=${productGroupId}&workTypeId=${workTypeId}&OrderId=0`
+  );
+  const data = await res.json();
+  return data;
+};
+
+export default async function Home({searchParams}:{searchParams: {productGroupId: string, workTypeId: string}}) {
+
+  const productGroupId = searchParams.productGroupId;
+  const workTypeId = searchParams.workTypeId;
+  const data = await getFromApi(productGroupId, workTypeId);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div >
+      <CustomBreadcrumb
+        className="mt-8"
+        items={breadCrumbItems}
+      />
+      <div className="flex flex-col lg:flex-row lg:justify-between items-start gap-8 mt-14">
+        {/* Right */}
+        <div className="flex flex-col gap-5 w-full lg:w-1/4">
+          <Gallery />
+          <Info />
+          <Tags />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Center */}
+        <div className="w-full overflow-y-auto">
+          <h1 className="text-lg font-semibold text-gray-500">{data.title}</h1>
+          <Form sections={data.sections} />
+        </div>
+
+        {/* Left */}
+        <div className=" lg:sticky lg:top-5 w-full lg:w-1/3">
+          <div className=" flex flex-col gap-5">
+            <Price basePrice={data.basePrice} currency={data.currency} />
+            <Link href="/">
+              <Button
+                variant="outline"
+                size="lg"
+                className="w-full font-medium"
+              >
+                <Brush />
+                سفارش طراحی آنلاین
+              </Button>
+            </Link>
+            <div className="bg-gray-100 text-xs p-2 rounded-md text-yellow-500 text-center ">
+              <b>توجه:</b> باتوجه به زمانبر بودن سفارشات تیراژ بالا، زمان تحویل
+              برای این سفارشات حدودی است.
+              <br />
+              تخفیف برای تیراژ های بالا به صورت خودکار اعمال می شود.
+            </div>
+            <div className="bg-gray-100  p-2 rounded-md  flex items-center justify-between text-xs">
+              <span className="text-gray-500">
+                ما را در شبکه های اجتماعی دنبال کنید
+              </span>
+              <div className="flex items-center gap-2 ">
+                <Link href="">
+                  <Instagram className="text-gray-600 hover:text-primary size-4" />
+                </Link>
+                <Link href="">
+                  <Twitter className="text-gray-600 hover:text-primary size-4" />
+                </Link>
+                <Link href="">
+                  <Linkedin className="text-gray-600 hover:text-primary size-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ProductTabs/>
     </div>
   );
 }
