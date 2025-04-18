@@ -59,7 +59,7 @@ const GenericField = ({ formField }: { formField: FormField }) => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Label
-                className="text-gray-600 w-14 xl:w-28"
+                className="text-gray-600 w-14 xl:w-28 leading-relaxed"
                 htmlFor={formField.fieldId}
               >
                 {formField.label}
@@ -86,7 +86,7 @@ const GenericField = ({ formField }: { formField: FormField }) => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Label
-                className="text-gray-600 w-14 xl:w-28"
+                className="text-gray-600 w-14 xl:w-28 leading-relaxed"
                 htmlFor={formField.fieldId}
               >
                 {formField.label}
@@ -114,7 +114,7 @@ const GenericField = ({ formField }: { formField: FormField }) => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Label
-                  className="text-gray-600 w-14 xl:w-28"
+                  className="text-gray-600 w-14 xl:w-28 leading-relaxed"
                   htmlFor={formField.fieldId}
                 >
                   {formField.label}
@@ -188,7 +188,7 @@ const GenericField = ({ formField }: { formField: FormField }) => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Label
-                  className="text-gray-600 w-14 xl:w-28"
+                  className="text-gray-600 w-14 xl:w-28 leading-relaxed"
                   htmlFor={formField.fieldId}
                 >
                   {formField.label}
@@ -236,7 +236,7 @@ const GenericField = ({ formField }: { formField: FormField }) => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Label
-                  className="text-gray-600 w-14 xl:w-28"
+                  className="text-gray-600 w-14 xl:w-28 leading-relaxed"
                   htmlFor={formField.fieldId}
                 >
                   {formField.label}
@@ -283,7 +283,7 @@ const GenericField = ({ formField }: { formField: FormField }) => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Label
-                className="text-gray-600 w-14 xl:w-28"
+                className="text-gray-600 w-14 xl:w-28 leading-relaxed"
                 htmlFor={formField.fieldId}
               >
                 {formField.label}
@@ -309,7 +309,7 @@ const GenericField = ({ formField }: { formField: FormField }) => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Label
-                className="text-gray-600 w-14 xl:w-28"
+                className="text-gray-600 w-14 xl:w-28 leading-relaxed"
                 htmlFor={formField.fieldId}
               >
                 {formField.label}
