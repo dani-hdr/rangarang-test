@@ -54,7 +54,7 @@ export default function RootLayout({
         <Provider>
           <div className="flex flex-col items-center w-full  relative h-full">
           <Header />
-          <main className="container mx-auto px-2 xl:px-4 ">{children}</main>
+          <main className="container mx-auto px-2 xl:px-4  ">{children}</main>
           </div>
           <MobileMenu/>
         </Provider>
